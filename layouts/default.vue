@@ -2,7 +2,7 @@
   <div>
     <Header />
     <main>
-      <CatalogSidebar />
+      <CategoriesSidebar />
       <nuxt />
     </main>
   </div>
