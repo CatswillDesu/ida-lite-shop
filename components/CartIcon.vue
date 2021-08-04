@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-icon">
+  <div class="cart-icon" @click="$store.dispatch('cart/openCart')">
     <CartVector />
     <div class="batch">0</div>
   </div>
@@ -9,6 +9,7 @@
 .cart-icon {
   position: relative;
   padding: 5px 10px;
+  cursor: pointer;
 
   .batch {
     position: absolute;

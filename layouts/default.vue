@@ -5,7 +5,10 @@
       <CategoriesSidebar />
       <nuxt />
     </main>
-    <Overlay />
+    <CartDrawer />
+    <transition name="fade">
+      <Overlay />
+    </transition>
   </div>
 </template>
 
@@ -59,5 +62,23 @@ main {
 
 .prevent-scroll {
   overflow: hidden;
+}
+
+.fade-enter-active {
+  animation: fade 0.3s;
+}
+
+.fade-leave-active {
+  animation: fade 0.3s reverse;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 </style>
