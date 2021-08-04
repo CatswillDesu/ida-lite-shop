@@ -25,14 +25,14 @@ export default {
     }
   },
   async fetch() {
-    this.categories = await this.$axios.$get('/product-category')
+    this.categories = await this.$axios.$get('/api/product-category')
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .catalog-sidebar {
-  width: 230px;
+  min-width: 230px;
   min-height: 100vh;
   height: 100%;
 
