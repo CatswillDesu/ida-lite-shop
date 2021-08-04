@@ -1,15 +1,26 @@
 <template>
-  <div>
+  <div class="prevent-scroll">
     <Header />
     <main>
       <CategoriesSidebar />
       <nuxt />
     </main>
+    <Overlay />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    this.$store.watch(({ isOverlayHidden }) => {
+      if (!isOverlayHidden) {
+        document.documentElement.style.overflow = 'hidden'
+      } else {
+        document.documentElement.style.overflow = 'auto'
+      }
+    })
+  }
+}
 </script>
 
 <style lang="scss">
@@ -44,5 +55,9 @@ ul {
 main {
   display: flex;
   padding: 0 90px;
+}
+
+.prevent-scroll {
+  overflow: hidden;
 }
 </style>

@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     catalogId: {
@@ -22,7 +24,15 @@ export default {
   },
   async fetch() {
     if (!this.catalogId) return
+    this.$store.dispatch('showLoaderWithOverlay')
     await this.$store.dispatch('products/fetchProducts', this.catalogId)
+    this.$store.dispatch('hideLoaderWithOverlay')
+  },
+  methods: {
+    ...mapMutations({
+      showLoader: 'showOverlay',
+      hideLoader: 'hideLoader'
+    })
   }
 }
 </script>
