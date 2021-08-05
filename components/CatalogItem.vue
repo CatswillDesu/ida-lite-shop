@@ -1,5 +1,5 @@
 <template>
-  <li class="product-item">
+  <li class="catalog-item">
     <div class="content">
       <span class="rating">
         <RatingStar />
@@ -31,15 +31,15 @@ export default {
     },
     name: {
       type: String,
-      default: ''
+      required: true
     },
     price: {
       type: Number,
-      required: true
+      default: 0
     },
     photoUrl: {
       type: String,
-      default: ''
+      required: true
     },
     rating: {
       type: Number,
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss">
-.product-item {
+.catalog-item {
   display: flex;
   flex-direction: column;
   padding: 18px 16px;
