@@ -37,7 +37,7 @@ export default {
   font-size: 16px;
   color: $white;
   cursor: pointer;
-  transition-property: color, background-color;
+  transition-property: background-color;
   @include basic-duration;
 
   &.centered {
@@ -54,8 +54,7 @@ export default {
   }
 
   &:hover {
-    color: darken($white, 5%);
-    background-color: lighten($black, 5%);
+    background-color: $grey;
   }
 }
 </style>

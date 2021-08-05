@@ -6,26 +6,46 @@
         <CloseIcon />
       </button>
     </header>
-    <ul v-if="$store.getters['cart/totalCount']" class="cart-items">
-      <li class="label">
-        <span>Товары в корзине</span>
-      </li>
-      <CartItem
-        v-for="item in cartItems"
-        :id="item.id"
-        :key="item.id"
-        :name="item.name"
-        :price="item.price"
-        :photo-url="item.photoUrl"
-        :quantity="item.quantity"
-      />
-    </ul>
-    <div v-else class="empty-alert">
-      <p class="message">Пока что вы ничего не добавили в корзину.</p>
-      <Button centered block @click="$store.dispatch('cart/closeCart')">
-        Перейти к выбору
-      </Button>
-    </div>
+    <transition name="fade">
+      <ul
+        v-if="$store.getters['cart/totalCount'] && !isOrderSent"
+        class="cart-items"
+      >
+        <li class="label">
+          <span>Товары в корзине</span>
+        </li>
+        <CartItem
+          v-for="item in cartItems"
+          :id="item.id"
+          :key="item.id"
+          :name="item.name"
+          :price="item.price"
+          :photo-url="item.photoUrl"
+          :quantity="item.quantity"
+        />
+      </ul>
+    </transition>
+    <transition name="fade">
+      <div
+        v-if="!$store.getters['cart/totalCount'] && !isOrderSent"
+        class="empty-alert"
+      >
+        <p class="message">Пока что вы ничего не добавили в корзину.</p>
+        <Button centered block @click="$store.dispatch('cart/closeCart')">
+          Перейти к выбору
+        </Button>
+      </div>
+    </transition>
+    <transition name="fade">
+      <OrderForm v-if="$store.getters['cart/totalCount'] && !isOrderSent" />
+    </transition>
+    <transition name="slide">
+      <div v-if="isOrderSent" class="success-message">
+        <HandOkEmoji class="emoji" />
+        <span class="title">Заявка успешно отправлена</span>
+        <span class="subtitle">Вскоре наш менеджер свяжется с Вами</span>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -37,6 +57,9 @@ export default {
     },
     cartItems() {
       return this.$store.state.cart.cartItems
+    },
+    isOrderSent() {
+      return this.$store.state.orderData.isOrderSent
     }
   }
 }
@@ -50,6 +73,8 @@ export default {
   right: -460px;
   width: 460px;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 48px;
   background-color: $white;
   transition-property: right;
@@ -90,9 +115,60 @@ export default {
 
   .empty-alert {
     .message {
+      margin-top: 0;
       margin-bottom: 24px;
       font-size: 22px;
     }
   }
+
+  .cart-items,
+  .empty-alert {
+    margin-bottom: 32px;
+  }
+
+  .success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+
+    .emoji {
+      margin-bottom: 24px;
+    }
+
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: $grey;
+    }
+  }
+}
+
+// animations
+.slide-enter-active,
+.slide-leave-active {
+  transition-property: transform, opacity;
+  transition-delay: 0.4s;
+  transition-duration: 0.8s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(500px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity;
+  transition-duration: 0.4s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

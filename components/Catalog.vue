@@ -1,14 +1,16 @@
 <template>
   <ul class="products-catalog">
-    <CatalogItem
-      v-for="product in $store.getters['products/sortedList']"
-      :id="product.id"
-      :key="product.id"
-      :name="product.name"
-      :price="product.price"
-      :photo-url="product.photo"
-      :rating="4.5"
-    />
+    <transition-group name="sort-list" tag="ul">
+      <CatalogItem
+        v-for="product in $store.getters['products/sortedList']"
+        :id="product.id"
+        :key="product.id"
+        :name="product.name"
+        :price="product.price"
+        :photo-url="product.photo"
+        :rating="4.5"
+      />
+    </transition-group>
   </ul>
 </template>
 
@@ -38,10 +40,15 @@ export default {
 }
 </script>
 
-<style>
-.products-catalog {
+<style lang="scss">
+.products-catalog ul {
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
+}
+
+// animations
+.sort-list-move {
+  transition: transform 1s;
 }
 </style>

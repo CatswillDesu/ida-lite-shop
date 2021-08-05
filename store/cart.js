@@ -22,10 +22,8 @@ export const mutations = {
         ...newItem,
         quantity: 1
       })
-      console.log('new item added')
     } else {
       state.cartItems[itemIndex].quantity++
-      console.log('item quantity incremented')
     }
   },
 

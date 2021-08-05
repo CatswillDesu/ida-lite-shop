@@ -7,17 +7,19 @@
         <SmallArrow class="arrow" :class="{ rotated: open }" />
       </span>
     </span>
-    <div v-show="open" class="options">
-      <div
-        v-for="option in sortTypes"
-        :key="option"
-        class="option"
-        :class="{ selected: sortBy === option }"
-        @click="selectType(option)"
-      >
-        {{ getSortTypeLabel(option) }}
+    <transition name="slide">
+      <div v-show="open" class="options">
+        <div
+          v-for="option in sortTypes"
+          :key="option"
+          class="option"
+          :class="{ selected: sortBy === option }"
+          @click="selectType(option)"
+        >
+          {{ getSortTypeLabel(option) }}
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -120,5 +122,19 @@ export default {
       }
     }
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition-property: transform;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+  transform-origin: top;
+}
+
+// animations
+.slide-enter,
+.slide-leave-to {
+  transform: scaleY(0);
 }
 </style>
