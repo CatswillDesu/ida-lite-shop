@@ -35,7 +35,7 @@ export default {
     },
     price: {
       type: Number,
-      default: 0
+      required: true
     },
     photoUrl: {
       type: String,
