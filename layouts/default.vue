@@ -64,21 +64,13 @@ main {
   overflow: hidden;
 }
 
-.fade-enter-active {
-  animation: fade 0.3s;
-}
-
+.fade-enter-active,
 .fade-leave-active {
-  animation: fade 0.3s reverse;
+  transition: opacity 0.3s;
 }
 
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -6,7 +6,10 @@
         <span class="score">{{ rating }}</span>
       </span>
       <div class="photo-cover" :style="[photoStyles]" />
-      <button class="add-button">
+      <button
+        class="add-button"
+        @click="addCartItem({ id, name, price, photoUrl, rating })"
+      >
         <CartVector width="14" height="14" />
       </button>
     </div>
@@ -18,15 +21,21 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true
+    },
     name: {
       type: String,
       default: ''
     },
     price: {
       type: Number,
-      default: 0
+      required: true
     },
     photoUrl: {
       type: String,
@@ -45,6 +54,11 @@ export default {
           : `url(${require('~/static/img/product-placeholder.png')})`
       }
     }
+  },
+  methods: {
+    ...mapMutations({
+      addCartItem: 'cart/addCartItem'
+    })
   }
 }
 </script>

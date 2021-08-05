@@ -1,7 +1,7 @@
 <template>
   <div class="cart-icon" @click="$store.dispatch('cart/openCart')">
     <CartVector />
-    <div class="batch">0</div>
+    <div class="batch">{{ $store.getters['cart/totalCount'] }}</div>
   </div>
 </template>
 

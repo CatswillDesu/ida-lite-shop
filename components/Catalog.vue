@@ -2,6 +2,7 @@
   <ul class="products-catalog">
     <CatalogItem
       v-for="product in $store.getters['products/sortedList']"
+      :id="product.id"
       :key="product.id"
       :name="product.name"
       :price="product.price"

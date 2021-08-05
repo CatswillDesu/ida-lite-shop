@@ -91,3 +91,6 @@ sw.*
 
 # package-lock file
 package-lock.json
+
+# vscode configuration
+.vscode
