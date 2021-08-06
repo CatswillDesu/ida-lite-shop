@@ -1,7 +1,7 @@
 <template>
   <form class="order-form" @submit.prevent="sendOrder">
     <span class="label">Оформить заказ</span>
-    <TextInput placeholder="Ваще имя" requried @handle-input="changeName" />
+    <TextInput placeholder="Ваше имя" requried @handle-input="changeName" />
     <TextInput
       placeholder="Телефон"
       mask="+7 ### ###-##-##"
