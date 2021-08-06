@@ -1,7 +1,9 @@
+import { compareByName } from '~/util'
+
 export const state = () => ({
   list: [],
   sortBy: 'default',
-  sortTypes: ['default', 'price']
+  sortTypes: ['default', 'priceDesc', 'priceAsc', 'name']
 })
 
 export const mutations = {
@@ -46,8 +48,12 @@ export const actions = {
 export const getters = {
   sortedList: (state) => {
     switch (state.sortBy) {
-      case 'price':
+      case 'priceAsc':
         return [...state.list].sort((a, b) => a.price - b.price)
+      case 'priceDesc':
+        return [...state.list].sort((a, b) => b.price - a.price)
+      case 'name':
+        return [...state.list].sort(compareByName)
       case 'default':
         return state.list
     }

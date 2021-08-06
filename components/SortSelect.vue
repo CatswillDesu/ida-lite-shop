@@ -48,8 +48,12 @@ export default {
       switch (type) {
         case 'default':
           return 'умолчанию'
-        case 'price':
-          return 'цене'
+        case 'priceAsc':
+          return 'возрастанию цены'
+        case 'priceDesc':
+          return 'убыванию цены'
+        case 'name':
+          return 'наименованию'
       }
     },
     selectType(type) {
@@ -97,7 +101,7 @@ export default {
 
   .options {
     position: absolute;
-    bottom: -70px;
+    bottom: -128px;
     right: 0;
     width: 160px;
     padding: 6px 0;
