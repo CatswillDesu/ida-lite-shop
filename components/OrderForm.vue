@@ -45,6 +45,9 @@ export default {
   methods: {
     sendOrder() {
       this.errors = []
+      if (!this.$store.getters['cart/totalCount']) {
+        this.errors.push('Коризна пуста')
+      }
       if (!validateName(this.name)) {
         this.errors.push('Имя имеет неверный формат')
       }
