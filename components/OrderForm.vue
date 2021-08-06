@@ -56,12 +56,14 @@ export default {
       }
       if (this.errors.length) return
       this.setOrderAsSent()
+      this.resetCart()
     },
     ...mapMutations({
       changeName: 'orderData/changeName',
       changePhone: 'orderData/changePhone',
       changeAddress: 'orderData/changeAddress',
-      setOrderAsSent: 'orderData/setOrderAsSent'
+      setOrderAsSent: 'orderData/setOrderAsSent',
+      resetCart: 'cart/resetCart'
     })
   }
 }

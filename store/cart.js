@@ -30,6 +30,8 @@ export const mutations = {
 
   setCartItems(state, newCartItems) {
     state.cartItems = newCartItems
+
+    localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
   },
 
   removeCartItem(state, itemToRemove) {
@@ -45,6 +47,12 @@ export const mutations = {
     } else {
       state.cartItems.splice(itemIndex, 1)
     }
+    localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+  },
+
+  resetCart(state) {
+    state.cartItems = []
+
     localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
   }
 }
