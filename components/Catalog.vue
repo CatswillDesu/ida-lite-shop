@@ -21,15 +21,25 @@ export default {
   props: {
     catalogId: {
       type: String,
-      default: null,
-      requried: true
+      required: true
     }
   },
-  async fetch() {
-    if (!this.catalogId) return
-    this.$store.dispatch('showLoaderWithOverlay')
-    await this.$store.dispatch('products/fetchProducts', this.catalogId)
-    this.$store.dispatch('hideLoaderWithOverlay')
+  computed: {
+    productsList() {
+      return this.$store.state.products.list
+    }
+  },
+  async mounted() {
+    const didPersist = await this.$store.dispatch(
+      'products/getProductsFromSession',
+      this.catalogId
+    ) // getting from session storage if set
+    if (!didPersist) {
+      // if not, then fetch from api
+      await this.$store.dispatch('showLoaderWithOverlay')
+      await this.$store.dispatch('products/fetchProducts', this.catalogId)
+      await this.$store.dispatch('hideLoaderWithOverlay')
+    }
   },
   methods: {
     ...mapMutations({

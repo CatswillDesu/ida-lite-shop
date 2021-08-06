@@ -15,6 +15,8 @@
 <script>
 export default {
   mounted() {
+    this.$store.dispatch('products/initSessionStorage')
+
     this.$store.watch(({ isOverlayHidden }) => {
       if (!isOverlayHidden) {
         document.documentElement.style.overflow = 'hidden'

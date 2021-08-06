@@ -61,6 +61,9 @@ export default {
     isOrderSent() {
       return this.$store.state.orderData.isOrderSent
     }
+  },
+  mounted() {
+    this.$store.dispatch('cart/getPersistedCartItems')
   }
 }
 </script>

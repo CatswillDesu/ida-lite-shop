@@ -25,6 +25,11 @@ export const mutations = {
     } else {
       state.cartItems[itemIndex].quantity++
     }
+    localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+  },
+
+  setCartItems(state, newCartItems) {
+    state.cartItems = newCartItems
   },
 
   removeCartItem(state, itemToRemove) {
@@ -40,6 +45,7 @@ export const mutations = {
     } else {
       state.cartItems.splice(itemIndex, 1)
     }
+    localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
   }
 }
 
@@ -52,6 +58,13 @@ export const actions = {
   closeCart({ commit }) {
     commit('hideOverlay', null, { root: true })
     commit('closeCart')
+  },
+
+  getPersistedCartItems({ commit }) {
+    const persistedCartItems = JSON.parse(localStorage.getItem('cartItems'))
+    if (persistedCartItems) {
+      commit('setCartItems', persistedCartItems)
+    }
   }
 }
 

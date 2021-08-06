@@ -8,15 +8,38 @@ export const mutations = {
   changeSortType(state, type) {
     state.sortBy = type
   },
-  setProductList(state, list) {
+  setProductList(state, { list, categoryId }) {
     state.list = list
+
+    const sessionProducts = JSON.parse(sessionStorage.getItem('products'))
+    sessionProducts[categoryId] = list
+    sessionStorage.setItem(`products`, JSON.stringify(sessionProducts))
   }
 }
 
 export const actions = {
   async fetchProducts({ commit }, categoryId) {
     const list = await this.$axios.$get(`/api/product?category=${categoryId}`)
-    commit('setProductList', list)
+    commit('setProductList', { list, categoryId })
+  },
+
+  initSessionStorage() {
+    const products = sessionStorage.getItem('products')
+    if (!products) {
+      sessionStorage.setItem('products', JSON.stringify({}))
+    }
+  },
+
+  getProductsFromSession({ commit }, categoryId) {
+    const sessionProducts = JSON.parse(sessionStorage.getItem('products'))
+    if (sessionProducts[categoryId]) {
+      commit('setProductList', {
+        list: sessionProducts[categoryId],
+        categoryId
+      })
+      return true
+    }
+    return false
   }
 }
 
