@@ -75,4 +75,10 @@ main {
 .fade-leave-to {
   opacity: 0;
 }
+
+@media screen and (max-width: 1050px) {
+  main {
+    padding: 0 40px;
+  }
+}
 </style>

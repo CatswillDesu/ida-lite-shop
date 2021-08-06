@@ -51,6 +51,7 @@ export const mutations = {
 
 export const actions = {
   openCart({ commit }) {
+    commit('closeMobileSidebar', null, { root: true })
     commit('showOverlay', null, { root: true })
     commit('openCart')
   },

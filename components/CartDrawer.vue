@@ -151,6 +151,14 @@ export default {
   }
 }
 
+@media screen and (max-width: 600px) {
+  .cart-drawer {
+    min-width: 100vw;
+    width: 100vw;
+    padding: 25px;
+  }
+}
+
 // animations
 .slide-enter-active,
 .slide-leave-active {

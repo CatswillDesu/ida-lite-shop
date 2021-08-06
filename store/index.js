@@ -1,6 +1,7 @@
 export const state = () => ({
   isLoading: false,
-  isOverlayHidden: true
+  isOverlayHidden: true,
+  isMobileSidebarOpen: false
 })
 
 export const mutations = {
@@ -18,6 +19,18 @@ export const mutations = {
 
   hideLoader(state) {
     state.isLoading = false
+  },
+
+  openMobileSidebar(state) {
+    state.isMobileSidebarOpen = true
+  },
+
+  closeMobileSidebar(state) {
+    state.isMobileSidebarOpen = false
+  },
+
+  toggleMobileSidebar(state) {
+    state.isMobileSidebarOpen = !state.isMobileSidebarOpen
   }
 }
 
@@ -26,6 +39,7 @@ export const actions = {
     commit('showOverlay')
     commit('showLoader')
   },
+
   hideLoaderWithOverlay({ commit }) {
     commit('hideOverlay')
     commit('hideLoader')

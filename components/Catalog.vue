@@ -61,4 +61,10 @@ export default {
 .sort-list-move {
   transition: transform 1s;
 }
+
+@media screen and (max-width: 1050px) {
+  .products-catalog ul {
+    justify-content: center;
+  }
+}
 </style>
